@@ -616,6 +616,7 @@ module Puma
 
       normalize_env env, req
 
+      env[PUMA_CLIENT] = req
       env[PUMA_SOCKET] = client
 
       if env[HTTPS_KEY] && client.peercert
