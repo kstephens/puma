@@ -77,7 +77,7 @@ module Puma
     end
 
     attr_reader :env, :to_io, :body, :io, :timeout_at, :ready, :hijacked,
-                :tempfile
+                :tempfile, :raw_header
 
     attr_writer :peerip
 
@@ -120,6 +120,7 @@ module Puma
     def reset(fast_check=true)
       @parser.reset
       @read_header = true
+      @raw_header = nil
       @env = @proto_env.dup
       @body = nil
       @tempfile = nil
@@ -246,6 +247,8 @@ module Puma
     private
 
     def setup_body
+      @raw_header = @buffer[0, @parsed_bytes] if @buffer && @parsed_bytes
+
       @body_read_start = Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
 
       if @env[HTTP_EXPECT] == CONTINUE
