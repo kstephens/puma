@@ -191,6 +191,7 @@ module Puma
     RACK_INPUT = "rack.input".freeze
     RACK_URL_SCHEME = "rack.url_scheme".freeze
     RACK_AFTER_REPLY = "rack.after_reply".freeze
+    PUMA_CLIENT = "puma.client".freeze
     PUMA_SOCKET = "puma.socket".freeze
     PUMA_CONFIG = "puma.config".freeze
     PUMA_PEERCERT = "puma.peercert".freeze
